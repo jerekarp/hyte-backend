@@ -22,18 +22,46 @@ const getItemById = (req, res) => {
 };
 
 const postItem = (req, res) => {
-    // TODO (vapaaehtonen, jatketaan tästä ens kerralla): lisää postattu item items-taulukkoon
-    res.json({message: 'item created'});
+  // lisää postattu item items-taulukkoon
+  res.json({message: 'item created'});
+  console.log('postItem request body', req.body);
+  // error if name property is missing
+  if (!req.body.name) {
+    return res.status(400).json({error: "item name missing"});
+  }
+  // new id: add 1 to last id number in the items array
+  const newId = items[items.length-1].id + 1;
+  const newItem = {id: newId, name: req.body.name};
+  items.push(newItem);
+  res.status(201).json({message: 'item created'});
 };
 
 const deleteItem = (req, res) => {
-    // TODO: implement delete
-    res.json({message: 'delete placeholder'});
+  const index = items.findIndex(item => item.id == req.params.id);
+  if (index === -1) {
+    // example how to send only the status code (still valid http response)
+    return res.sendStatus(404);
+  }
+  const deletedItems = items.splice(index, 1);
+  console.log('deleteItem:', deletedItems);
+  res.json({deleted_item: deletedItems[0]});
+  // or successful response without any content
+  // res.sendStatus(204);
 };
 
+
 const putItem = (req, res) => {
-    // TODO: implement modify item
-    res.json({message: 'putplaceholder'});
+  const index = items.findIndex(item => item.id == req.params.id);
+  // not found
+  if (index === -1) {
+    return res.sendStatus(404);
+  }
+  // bad request
+  if (!req.body.name) {
+    return res.status(400).json({error: "item name missing"});
+  }
+  items[index].name = req.body.name;
+  res.json({updated_item: items[index]});
 };
 
 export {getItems, getItemById, postItem, deleteItem, putItem};
