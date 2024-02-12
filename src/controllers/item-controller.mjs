@@ -1,37 +1,37 @@
-import items from '../models/item-model.mjs'
+import items from '../models/item-model.mjs';
 
-  const getItems = (req, res) => {
-    res.json(items);
+const getItems = (req, res) => {
+  res.json(items);
 };
 
+// palauta vain se objekti, jonka id vastaa pyydettyä, muuten 404
 const getItemById = (req, res) => {
-    // TODO: palauta vain se objekti, jonka id vastaa pyydettyä
-    console.log('requested item id', req.params.id);
-    let item = items.find(item => item.id === parseInt(req.params.id));
-    if (item) {
-      res.json(item);
-    } else {
-      res.status(404).json({ error: 'Invalid object'});
-    }
+  // console.log('requested item id', req.params.id);
+  const itemFound = items.find((item) => item.id == req.params.id);
+  // console.log('found item', itemFound);
+  if (itemFound) {
+    res.json(itemFound);
+  } else {
+    res.status(404).json({error: 'not found'});
+  }
 };
 
 const postItem = (req, res) => {
   // lisää postattu item items-taulukkoon
-  res.json({message: 'item created'});
   console.log('postItem request body', req.body);
   // error if name property is missing
   if (!req.body.name) {
-    return res.status(400).json({error: "item name missing"});
+    return res.status(400).json({error: 'item name missing'});
   }
   // new id: add 1 to last id number in the items array
-  const newId = items[items.length-1].id + 1;
+  const newId = items[items.length - 1].id + 1;
   const newItem = {id: newId, name: req.body.name};
   items.push(newItem);
   res.status(201).json({message: 'item created'});
 };
 
 const deleteItem = (req, res) => {
-  const index = items.findIndex(item => item.id == req.params.id);
+  const index = items.findIndex((item) => item.id == req.params.id);
   if (index === -1) {
     // example how to send only the status code (still valid http response)
     return res.sendStatus(404);
@@ -43,16 +43,16 @@ const deleteItem = (req, res) => {
   // res.sendStatus(204);
 };
 
-
 const putItem = (req, res) => {
-  const index = items.findIndex(item => item.id == req.params.id);
+  // TODO: implement modify item
+  const index = items.findIndex((item) => item.id == req.params.id);
   // not found
   if (index === -1) {
     return res.sendStatus(404);
   }
   // bad request
   if (!req.body.name) {
-    return res.status(400).json({error: "item name missing"});
+    return res.status(400).json({error: 'item name missing'});
   }
   items[index].name = req.body.name;
   res.json({updated_item: items[index]});
