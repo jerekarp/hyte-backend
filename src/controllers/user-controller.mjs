@@ -80,4 +80,4 @@ import {
     }
   };
 
-  export {getUsers, getUserById, postUser, putUser, postLogin, deleteUser};
+export {getUsers, getUserById, postUser, putUser, postLogin, deleteUser};
