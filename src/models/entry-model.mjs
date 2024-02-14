@@ -1,57 +1,87 @@
+// Note: db functions are async and must be called with await from the controller
 import promisePool from '../utils/database.mjs';
 
 const listAllEntries = async () => {
   try {
-    const sql = 'SELECT * FROM diaryentries';
-    const [rows] = await promisePool.query(sql);
-    console.log(sql)
+    const [rows] = await promisePool.query('SELECT * FROM DiaryEntries');
+    // console.log('rows', rows);
     return rows;
-  } catch (error) {
-    console.error('listAllEntries', error);
-    return { error: 500, message: 'Database error' };
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
   }
 };
 
-const selectEntryById = async (id) => {
+const findEntryById = async (id) => {
   try {
-    const sql = 'SELECT * FROM diaryentries WHERE entry_id = ?';
-    const params = [id];
-    const [rows] = await promisePool.query(sql, params);
-    if (rows.length === 0) {
-      return { error: 404, message: 'Entry not found' };
-    }
+    const [rows] = await promisePool.query(
+      'SELECT * FROM DiaryEntries WHERE entry_id = ?',
+      [id]
+    );
+    // console.log('rows', rows);
     return rows[0];
-  } catch (error) {
-    console.error('selectEntryById', error);
-    return { error: 500, message: 'Database error' };
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
   }
 };
 
-const updateEntryById = async (entry_id, entry) => {
+const addEntry = async (entry) => {
+  const {user_id, entry_date, mood, weight, sleep_hours, notes} = entry;
+  const sql = `INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes)
+  VALUES (?, ?, ?, ?, ?, ?)`;
+  const params = [user_id, entry_date, mood, weight, sleep_hours, notes];
   try {
-    const sql = 'UPDATE diaryentries SET mood=?, weight=?, sleep_hours=?, notes=?, created_at=? WHERE entry_id=?';
-    const params = [entry.mood, entry.weight, entry.sleep_hours, entry.notes, entry.created_at, entry_id];
-    await promisePool.query(sql, params);
-    return { message: 'Entry updated', entry_id: entry_id };
-  } catch (error) {
-    console.error('updateEntryById', error);
-    return { error: 500, message: 'Database error' };
+    // change query method?
+    const rows = await promisePool.query(sql, params);
+    // console.log('rows', rows);
+    return {entry_id: rows[0].insertId};
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
   }
 };
 
-const deleteEntryById = async (entry_id) => {
+const updateEntryById = async (entry) => {
+  const {entry_id, entry_date, mood, weight, sleep_hours, notes} = entry;
   try {
-    const sql = 'DELETE FROM diaryentries WHERE entry_id=?';
-    const params = [entry_id];
+    const sql =
+      'UPDATE DiaryEntries SET entry_date=?, mood=?, weight=?, sleep_hours=?, notes=? WHERE entry_id=?';
+    const params = [entry_date, mood, weight, sleep_hours, notes, entry_id];
     const [result] = await promisePool.query(sql, params);
+    // console.log(result);
     if (result.affectedRows === 0) {
-      return { error: 404, message: 'Entry not found' };
+      return {error: 404, message: 'entry not found'};
     }
-    return { message: 'Entry deleted', entry_id: entry_id };
+    return {message: 'entry data updated', entry_id};
+  } catch (error) {
+    // fix error handling
+    // now duplicate entry error is generic 500 error, should be fixed to 400 ?
+    console.error('updateEntryById', error);
+    return {error: 500, message: 'db error'};
+  }
+};
+
+const deleteEntryById = async (id) => {
+  try {
+    const sql = 'DELETE FROM DiaryEntries WHERE entry_id=?';
+    const params = [id];
+    const [result] = await promisePool.query(sql, params);
+    // console.log(result);
+    if (result.affectedRows === 0) {
+      return {error: 404, message: 'entry not found'};
+    }
+    return {message: 'entry deleted', entry_id: id};
   } catch (error) {
     console.error('deleteEntryById', error);
-    return { error: 500, message: 'Database error' };
+    return {error: 500, message: 'db error'};
   }
 };
 
-export { listAllEntries, selectEntryById, updateEntryById, deleteEntryById };
+export {
+  listAllEntries,
+  findEntryById,
+  addEntry,
+  updateEntryById,
+  deleteEntryById,
+};

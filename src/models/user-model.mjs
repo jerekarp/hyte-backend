@@ -1,4 +1,4 @@
-import promisePool from '../utils/database.mjs';
+import promisePool from '../utils/database.mjs';console.log
 
 const listAllUsers = async () => {
   try {
@@ -33,7 +33,8 @@ const selectUserById = async (id) => {
 
 const insertUser = async (user) => {
   try {
-    const sql = 'INSERT INTO Users (username, password, email) VALUES (?, ?, ?)';
+    const sql =
+      'INSERT INTO Users (username, password, email) VALUES (?, ?, ?)';
     const params = [user.username, user.password, user.email];
     const [result] = await promisePool.query(sql, params);
     //console.log(result);
@@ -47,10 +48,11 @@ const insertUser = async (user) => {
 
 const updateUserById = async (user) => {
   try {
-    const sql = 'UPDATE Users SET username=?, password=?, email=? WHERE user_id=?';
+    const sql =
+      'UPDATE Users SET username=?, password=?, email=? WHERE user_id=?';
     const params = [user.username, user.password, user.email, user.user_id];
     const [result] = await promisePool.query(sql, params);
-    console.log(result);
+    // console.log(result);
     return {message: 'user data updated', user_id: user.user_id};
   } catch (error) {
     // fix error handling
@@ -65,7 +67,7 @@ const deleteUserById = async (id) => {
     const sql = 'DELETE FROM Users WHERE user_id=?';
     const params = [id];
     const [result] = await promisePool.query(sql, params);
-    console.log(result);
+    // console.log(result);
     if (result.affectedRows === 0) {
       return {error: 404, message: 'user not found'};
     }
@@ -77,4 +79,31 @@ const deleteUserById = async (id) => {
   }
 };
 
-export {listAllUsers, selectUserById, insertUser, updateUserById, deleteUserById};
+// Used for login
+const selectUserByNameAndPassword = async (username, password) => {
+  try {
+    const sql = 'SELECT * FROM Users WHERE username=? AND password=?';
+    const params = [username, password];
+    const [rows] = await promisePool.query(sql, params);
+    //console.log(rows);
+    // if nothing is found with the username and password, login attempt has failed
+    if (rows.length === 0) {
+      return {error: 401, message: 'invalid username or password'};
+    }
+    // Otherwise, remove password property from the result and return the user object
+    delete rows[0].password;
+    return rows[0];
+  } catch (error) {
+    console.error('selectUserByNameAndPassword', error);
+    return {error: 500, message: 'db error'};
+  }
+};
+
+export {
+  listAllUsers,
+  selectUserById,
+  insertUser,
+  updateUserById,
+  deleteUserById,
+  selectUserByNameAndPassword,
+};

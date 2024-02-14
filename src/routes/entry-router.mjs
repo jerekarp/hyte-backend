@@ -1,20 +1,16 @@
 import express from 'express';
 import {
   getEntries,
-  getEntry,
-  updateEntry,
+  getEntryById,
+  postEntry,
+  putEntry,
   deleteEntry,
 } from '../controllers/entry-controller.mjs';
 
 const entryRouter = express.Router();
 
+entryRouter.route('/').get(getEntries).post(postEntry);
 
-entryRouter.route('/')
-  .get(getEntries)
-
-entryRouter.route('/:id')
-  .get(getEntry)
-  .put(updateEntry)
-  .delete(deleteEntry);
+entryRouter.route('/:id').get(getEntryById).put(putEntry).delete(deleteEntry);
 
 export default entryRouter;
