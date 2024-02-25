@@ -13,18 +13,30 @@ const listAllEntries = async () => {
   }
 };
 
-const findEntryById = async (id) => {
+const listAllEntriesByUserId = async (id) => {
   try {
-    const sql = 'SELECT * FROM diaryentries WHERE entry_id = ?';
+    const sql = 'SELECT * FROM DiaryEntries WHERE user_id=?';
     const params = [id];
     const [rows] = await promisePool.query(sql, params);
-    if (rows.length === 0) {
-      return { error: 404, message: 'Entry not found' };
-    }
+    // console.log('rows', rows);
+    return rows;
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
+};
+
+const findEntryById = async (id) => {
+  try {
+    const [rows] = await promisePool.query(
+        'SELECT * FROM DiaryEntries WHERE entry_id = ?',
+        [id],
+    );
+    console.log('rows', rows);
     return rows[0];
-  } catch (error) {
-    console.error('selectEntryById', error);
-    return { error: 500, message: 'Database error' };
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
   }
 };
 
@@ -73,6 +85,7 @@ const addEntry = async (entry) => {
 
 export {
   listAllEntries,
+  listAllEntriesByUserId,
   findEntryById,
   addEntry,
   updateEntryById,

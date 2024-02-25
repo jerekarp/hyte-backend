@@ -6,6 +6,8 @@ import itemRouter from './routes/item-router.mjs';
 import userRouter from './routes/user-router.mjs';
 import entryRouter from './routes/entry-router.mjs';
 import cors from 'cors';
+import logger from './middlewares/logger.mjs';
+import authRouter from './routes/auth-router.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
@@ -14,6 +16,9 @@ const app = express();
 // Eli kerrotaan selaimelle, että tämä palvelin sallii AJAX-pyynnöt
 // myös muista kuin samasta alkuperästä (url-osoitteesta, palvelimelta) ladatuilta sivuilta.
 app.use(cors());
+
+// logger middleware
+app.use(logger);
 
 // middleware, joka parsii pyynnössä olevan JSON-datan ja lisää sen request-objektiin (req.body)
 app.use(express.json());
@@ -36,6 +41,9 @@ app.use('/api/entries', entryRouter);
 
 // Users resource (/api/users)
 app.use('/api/users', userRouter);
+
+// User authentication
+app.use('/api/auth', authRouter);
 
 // Start the server
 app.listen(port, hostname, () => {

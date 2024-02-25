@@ -80,18 +80,16 @@ const deleteUserById = async (id) => {
 };
 
 // Used for login
-const selectUserByNameAndPassword = async (username, password) => {
+const selectUserByUsername = async (username) => {
   try {
-    const sql = 'SELECT * FROM Users WHERE username=? AND password=?';
-    const params = [username, password];
+    const sql = 'SELECT * FROM Users WHERE username=?';
+    const params = [username];
     const [rows] = await promisePool.query(sql, params);
-    //console.log(rows);
-    // if nothing is found with the username and password, login attempt has failed
+    // console.log(rows);
+    // if nothing is found with the username, login attempt has failed
     if (rows.length === 0) {
       return {error: 401, message: 'invalid username or password'};
     }
-    // Otherwise, remove password property from the result and return the user object
-    delete rows[0].password;
     return rows[0];
   } catch (error) {
     console.error('selectUserByNameAndPassword', error);
@@ -105,5 +103,5 @@ export {
   insertUser,
   updateUserById,
   deleteUserById,
-  selectUserByNameAndPassword,
+  selectUserByUsername
 };
