@@ -10,7 +10,10 @@ import {authenticateToken} from '../middlewares/authentication.mjs';
 
 const entryRouter = express.Router();
 
-entryRouter.route('/').get(authenticateToken, getEntries).post(postEntry);
+entryRouter.route('/')
+  .get(authenticateToken, getEntries)
+  // TODO: add authentication and input validation
+  .post(postEntry);
 
 entryRouter.route('/:id').get(getEntryById).put(putEntry).delete(deleteEntry);
 

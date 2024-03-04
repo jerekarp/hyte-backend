@@ -8,6 +8,7 @@ import entryRouter from './routes/entry-router.mjs';
 import cors from 'cors';
 import logger from './middlewares/logger.mjs';
 import authRouter from './routes/auth-router.mjs';
+import {errorHandler, notFoundHandler} from './middlewares/error-handler.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
@@ -49,3 +50,8 @@ app.use('/api/auth', authRouter);
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+// Default 404 not found
+app.use(notFoundHandler);
+// Error handler for sending response all error cases
+app.use(errorHandler);

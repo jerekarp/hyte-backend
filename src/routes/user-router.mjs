@@ -1,4 +1,5 @@
 import express from 'express';
+import {body} from 'express-validator';
 import {
   getUserById,
   getUsers,
@@ -20,7 +21,12 @@ userRouter
   // update user
   .put(authenticateToken, putUser)
   // user registration
-  .post(postUser);
+  .post(
+    body('username').trim().isLength({min: 3, max: 20}).isAlphanumeric(),
+    body('password').trim().isLength({min: 8, max: 128}),
+    body('email').trim().isEmail(),
+    postUser,
+  );
 
 // /user/:id endpoint
 userRouter

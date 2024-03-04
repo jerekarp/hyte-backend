@@ -1,4 +1,4 @@
-import promisePool from '../utils/database.mjs';console.log
+import promisePool from '../utils/database.mjs';
 
 const listAllUsers = async () => {
   try {
@@ -31,18 +31,19 @@ const selectUserById = async (id) => {
   }
 };
 
-const insertUser = async (user) => {
+const insertUser = async (user, next) => {
   try {
     const sql =
       'INSERT INTO Users (username, password, email) VALUES (?, ?, ?)';
     const params = [user.username, user.password, user.email];
     const [result] = await promisePool.query(sql, params);
-    //console.log(result);
+    // console.log(result);
     return {message: 'new user created', user_id: result.insertId};
   } catch (error) {
     // now duplicate entry error is generic 500 error, should be fixed to 400 ?
     console.error('insertUser', error);
-    return {error: 500, message: 'db error'};
+    // Error handler can be used directly from model, if next function is passed
+    return next(new Error(error));
   }
 };
 
