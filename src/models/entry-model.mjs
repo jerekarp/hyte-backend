@@ -15,7 +15,7 @@ const listAllEntries = async () => {
 
 const listAllEntriesByUserId = async (id) => {
   try {
-    const sql = 'SELECT * FROM DiaryEntries WHERE user_id=?';
+    const sql = 'SELECT * FROM diaryentries WHERE user_id=?';
     const params = [id];
     const [rows] = await promisePool.query(sql, params);
     // console.log('rows', rows);
@@ -29,7 +29,7 @@ const listAllEntriesByUserId = async (id) => {
 const findEntryById = async (id) => {
   try {
     const [rows] = await promisePool.query(
-        'SELECT * FROM DiaryEntries WHERE entry_id = ?',
+        'SELECT * FROM diaryentries WHERE entry_id = ?',
         [id],
     );
     console.log('rows', rows);
@@ -69,7 +69,7 @@ const deleteEntryById = async (entry_id) => {
 
 const addEntry = async (entry) => {
   const {user_id, entry_date, mood, weight, sleep_hours, notes} = entry;
-  const sql = `INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes)
+  const sql = `INSERT INTO diaryentries (user_id, entry_date, mood, weight, sleep_hours, notes)
   VALUES (?, ?, ?, ?, ?, ?)`;
   const params = [user_id, entry_date, mood, weight, sleep_hours, notes];
   try {
