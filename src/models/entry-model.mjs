@@ -26,13 +26,13 @@ const listAllEntriesByUserId = async (id) => {
   }
 };
 
-const findEntryById = async (id) => {
+const findEntryById = async (id, userId) => {
   try {
     const [rows] = await promisePool.query(
-        'SELECT * FROM diaryentries WHERE entry_id = ?',
-        [id],
+      'SELECT * FROM diaryentries WHERE entry_id = ? AND user_id = ?',
+      [id, userId],
     );
-    console.log('rows', rows);
+    // console.log('rows', rows);
     return rows[0];
   } catch (e) {
     console.error('error', e.message);
@@ -40,40 +40,67 @@ const findEntryById = async (id) => {
   }
 };
 
-const updateEntryById = async (entry_id, entry) => {
+const updateEntryById = async (entryId, userId, entryData) => {
   try {
-    const sql = 'UPDATE diaryentries SET mood=?, weight=?, sleep_hours=?, notes=?, created_at=? WHERE entry_id=?';
-    const params = [entry.mood, entry.weight, entry.sleep_hours, entry.notes, entry.created_at, entry_id];
-    await promisePool.query(sql, params);
-    return { message: 'Entry updated', entry_id: entry_id };
-  } catch (error) {
-    console.error('updateEntryById', error);
-    return { error: 500, message: 'Database error' };
-  }
-};
+    // Luo uusi objekti, joka sisältää vain muuttujat, jotka ovat sallittuja päivitettäväksi
+    const allowedFields = {
+      entry_date: entryData.entry_date,
+      mood: entryData.mood,
+      weight: entryData.weight,
+      sleep_hours: entryData.sleep_hours,
+      notes: entryData.notes,
+    };
 
-const deleteEntryById = async (entry_id) => {
-  try {
-    const sql = 'DELETE FROM diaryentries WHERE entry_id=?';
-    const params = [entry_id];
-    const [result] = await promisePool.query(sql, params);
+    // Muodosta SQL-kysely käyttämällä FORMAT-funktiota, jotta mukana on vain sallitut kentät
+    const sql = promisePool.format(
+      `UPDATE diaryentries SET ?
+       WHERE entry_id=? AND user_id=?`,
+      [allowedFields, entryId, userId]
+    );
+
+    const [result] = await promisePool.query(sql);
+
     if (result.affectedRows === 0) {
       return { error: 404, message: 'Entry not found' };
     }
-    return { message: 'Entry deleted', entry_id: entry_id };
+
+    return { message: 'Entry data updated', entry_id: entryId };
   } catch (error) {
-    console.error('deleteEntryById', error);
-    return { error: 500, message: 'Database error' };
+    console.error('updateEntryById', error);
+    return { error: 500, message: 'db error' };
   }
 };
 
-const addEntry = async (entry) => {
-  const {user_id, entry_date, mood, weight, sleep_hours, notes} = entry;
-  const sql = `INSERT INTO diaryentries (user_id, entry_date, mood, weight, sleep_hours, notes)
-  VALUES (?, ?, ?, ?, ?, ?)`;
-  const params = [user_id, entry_date, mood, weight, sleep_hours, notes];
+
+const deleteEntryById = async (id, userId) => {
   try {
-    // change query method?
+    const sql = 'DELETE FROM diaryentries WHERE entry_id=? AND user_id=?';
+    const params = [id, userId];
+    const [result] = await promisePool.query(sql, params);
+    // console.log(result);
+    if (result.affectedRows === 0) {
+      return {error: 404, message: 'Entry not found'};
+    }
+    return {message: 'Entry deleted', entry_id: id};
+  } catch (error) {
+    console.error('deleteEntryById', error);
+    return {error: 500, message: 'db error'};
+  }
+};
+
+const addEntry = async (entry, userId) => {
+  const sql = `INSERT INTO diaryentries
+               (user_id, entry_date, mood, weight, sleep_hours, notes)
+               VALUES (?, ?, ?, ?, ?, ?)`;
+  const params = [
+    userId,
+    entry.entry_date,
+    entry.mood,
+    entry.weight,
+    entry.sleep_hours,
+    entry.notes,
+  ];
+  try {
     const rows = await promisePool.query(sql, params);
     // console.log('rows', rows);
     return {entry_id: rows[0].insertId};

@@ -1,16 +1,31 @@
+/**
+ * Authentication resource controller
+ * @module controllers/auth-controller
+ * @author jerekarp <jerepk@metropolia.fi>
+ * @requires jsonwebtoken
+ * @requires bcryptjs
+ * @requires dotenv
+ * @requires models/user-model
+ * @requires middlewares/error-handler
+ * @exports postLogin
+ * @exports getMe
+ */
+
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import 'dotenv/config';
 import {selectUserByUsername} from '../models/user-model.mjs';
+import {customError} from '../middlewares/error-handler.mjs';
 
 /**
  * User login
+ * @async
  * @param {object} req
  * @param {object} res
+ * @param {function} next
  * @return {object} user if username & password match
  */
-
-const postLogin = async (req, res) => {
+const postLogin = async (req, res, next) => {
   const {username, password} = req.body;
   console.log('login', req.body);
   const user = await selectUserByUsername(username);
@@ -21,15 +36,24 @@ const postLogin = async (req, res) => {
   const match = await bcrypt.compare(password, user.password);
   if (match) {
     delete user.password;
-    const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: '24h'});
-    return res.json({message: 'logged in successfully', user, token});
+    const token = jwt.sign(user, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+    return res.json({message: 'Logged in successfully', user, token});
   } else {
-    return res
-      .status(401)
-      .json({error: 401, message: 'invalid username or password'});
+    return next(customError('Invalid username or password', 401));
   }
 };
 
+/**
+ * Get user info from token
+ * NOTE! user info is extracted from the token
+ * => it is not necessary up to date info (should be refreshed from db)
+ * @async
+ * @param {object} req
+ * @param {object} res
+ * @return {object} user info
+ */
 const getMe = async (req, res) => {
   res.json({user: req.user});
 };

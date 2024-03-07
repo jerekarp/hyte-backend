@@ -27,48 +27,54 @@ content-type: application/json
 body: {"name": "New Item"}
 ```
 
-### `/api/users`
-
-Example queries:
-
-```http
-# Get all users (requires token)
-GET http://127.0.0.1:3000/users
-
-# Get user by id (requires token)
-GET http://127.0.0.1:3000/users/:id
-
-# Delete user (requires token)
-DELETE http://127.0.0.1:3000/users/:id
-
-# Create user
-POST http://127.0.0.1:3000/users
-content-type: application/json
-
-{
-  "username": "test-update4",
-  "password": "test-pw-update4",
-  "email": "update4@example.com"
-}
-
-# Update user's own data (requires token)
-PUT http://127.0.0.1:3000/users/
-content-type: application/json
-
-{
-  "username": "test-update4",
-  "password": "test-pw-update4",
-  "email": "update4@example.com"
-}
+### `/api/auth`
 
 # Login
-POST http://localhost:3000/api/users/login
+```http
+POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
   "username": "user",
   "password": "secret"
 }
+
+```
+
+### `/api/users`
+
+Example queries:
+
+```http
+# Get all users (requires token)
+GET http://127.0.0.1:3000/api/users
+
+# Get user by id (requires token)
+GET http://127.0.0.1:3000/api/users/:id
+
+# Delete user (requires token)
+DELETE http://127.0.0.1:3000/api/users/:id
+
+# Create user
+POST http://127.0.0.1:3000/api/users
+content-type: application/json
+
+{
+  "username": "test-user",
+  "password": "test-password",
+  "email": "test@example.com"
+}
+
+# Update user's own data (requires token)
+PUT http://127.0.0.1:3000/api/users/
+content-type: application/json
+
+{
+  "username": "test-user",
+  "password": "test-password",
+  "email": "test@example.com"
+}
+
 
 ```
 
@@ -106,9 +112,44 @@ content-type: application/json
   "weight": 69.6,
   "sleep_hours": 7,
   "notes": "This was a good day",
-  "user_id": 3
 }
 
 # Delete entry
 DELETE http://localhost:3000/api/entries/:id
+```
+
+### `/api/activities`
+
+Example queries:
+
+```http
+# Get all activities for a logged in user (requires token)
+GET http://localhost:3000/api/activities
+
+# Get activities by id (requires token)
+GET http://localhost:3000/api/activities/:id
+
+# Post activity
+POST http://localhost:3000/api/activities
+content-type: application/json
+
+{
+    "activity_type": "Swimming",
+    "intensity": 8,
+    "duration": "01:15:00",
+    "user_id": 16
+}
+
+# Update activity
+PUT http://localhost:3000/api/activities/:id
+content-type: application/json
+
+{
+  "activity_type": "Swimming",
+  "intensity": 8,
+  "duration": "01:16:00"
+}
+
+# Delete activity
+DELETE http://localhost:3000/api/activities/:id
 ```
