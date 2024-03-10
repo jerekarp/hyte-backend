@@ -51,12 +51,12 @@ const updateUserById = async (user) => {
   try {
     const sql =
       'UPDATE Users SET username=?, password=?, email=? WHERE user_id=?';
-    const params = [user.username, user.password, user.email, user.user_id];
+    const params = [user.username, user.password, user.email, user.userId];
+    await promisePool.query(sql, params);
     const [result] = await promisePool.query(sql, params);
-    // console.log(result);
-    return {message: 'user data updated', user_id: user.user_id};
+    console.log(result);
+    return {message: 'user data updated', user_id: user.userId};
   } catch (error) {
-    // fix error handling
     // now duplicate entry error is generic 500 error, should be fixed to 400 ?
     console.error('updateUserById', error);
     return {error: 500, message: 'db error'};
