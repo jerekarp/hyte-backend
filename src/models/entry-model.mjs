@@ -42,7 +42,6 @@ const findEntryById = async (id, userId) => {
 
 const updateEntryById = async (entryId, userId, entryData) => {
   try {
-    // Luo uusi objekti, joka sisältää vain muuttujat, jotka ovat sallittuja päivitettäväksi
     const allowedFields = {
       entry_date: entryData.entry_date,
       mood: entryData.mood,
@@ -51,7 +50,7 @@ const updateEntryById = async (entryId, userId, entryData) => {
       notes: entryData.notes,
     };
 
-    // Muodosta SQL-kysely käyttämällä FORMAT-funktiota, jotta mukana on vain sallitut kentät
+
     const sql = promisePool.format(
       `UPDATE diaryentries SET ?
        WHERE entry_id=? AND user_id=?`,

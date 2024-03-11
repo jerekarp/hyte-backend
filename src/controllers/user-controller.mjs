@@ -46,27 +46,50 @@ const postUser = async (req, res, next) => {
   return res.status(201).json(result);
 };
 
-// Only user authenticated by token can update own data
 const putUser = async (req, res, next) => {
-  // Get userinfo from req.user object extracted from token
-  // Only user authenticated by token can update own data
-  // TODO: admin user can update any user (incl. user_level)
   const userId = req.user.user_id;
-  const {username, password, email} = req.body;
-  // hash password if included in request
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-  const result = await updateUserById({
-    userId,
-    username,
-    password: hashedPassword,
-    email,
-  });
-  if (result.error) {
-    return next(customError(result, result.error));
+  const { username, password, email } = req.body;
+
+  // Admin user can update any user
+  // Check if the authenticated user is admin
+  if (req.user.user_level === 'admin') {
+    // If the authenticated user is admin, proceed with the update
+    // Hash password if included in request
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const result = await updateUserById({
+      userId,
+      username,
+      password: hashedPassword,
+      email,
+    });
+    if (result.error) {
+      return next(customError(result, result.error));
+    }
+    return res.status(200).json(result);
+  } else {
+    // If the authenticated user is not admin, they can only update their own data
+    // Check if the user is trying to update their own data
+    if (userId !== parseInt(req.params.id)) {
+      return next(customError('Unauthorized', 401));
+    }
+    // If the user is updating their own data, proceed with the update
+    // Hash password if included in request
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const result = await updateUserById({
+      userId,
+      username,
+      password: hashedPassword,
+      email,
+    });
+    if (result.error) {
+      return next(customError(result, result.error));
+    }
+    return res.status(200).json(result);
   }
-  return res.status(200).json(result);
 };
+
 
 const deleteUser = async (req, res, next) => {
   // console.log('deleteUser', req.user, req.params.id);

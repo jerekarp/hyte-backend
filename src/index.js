@@ -6,6 +6,7 @@ import itemRouter from './routes/item-router.mjs';
 import userRouter from './routes/user-router.mjs';
 import entryRouter from './routes/entry-router.mjs';
 import activitiesRouter from './routes/acti-router.mjs';
+import measurementsRouter from './routes/meas-router.mjs';
 import cors from 'cors';
 import logger from './middlewares/logger.mjs';
 import authRouter from './routes/auth-router.mjs';
@@ -33,7 +34,7 @@ app.use(express.static('public'));
 // Tarjoiltava kansio määritellään relatiivisella polulla (tässä käytössä sama kansio kuin yllä).
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use('/sivusto', express.static(path.join(__dirname, '../public')));
+app.use('/docs', express.static(path.join(__dirname, '../docs')));
 
 // Test RESOURCE /items endpoints (just mock data for testing, not connected to any database)
 app.use('/items', itemRouter);
@@ -49,6 +50,9 @@ app.use('/api/auth', authRouter);
 
 // Activities
 app.use('/api/activities', activitiesRouter);
+
+// Measurements
+app.use('/api/measurements', measurementsRouter);
 
 // Default 404 not found
 app.use(notFoundHandler);

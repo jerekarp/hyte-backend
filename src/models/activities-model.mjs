@@ -40,28 +40,33 @@ const findActivityById = async (id, userId) => {
     }
 };
 
-const updateActivityById = async (activity_id, userId, activityData) => {
-    console.log(userId)
-    try {
-        const params = [activityData, activity_id, userId];
-        const sql = promisePool.format(
-          `UPDATE activities SET ?
-           WHERE activity_id=? AND user_id=?`,
-          params,
-        );
-        const [result] = await promisePool.query(sql, params);
-        console.log(userId)
-        if (result.affectedRows === 0) {
-          return {error: 404, message: 'Activity not found'};
-        }
-        return {message: 'Activity data updated', activity_id: activity_id};
-      } catch (error) {
-        // fix error handling
-        // now duplicate entry error is generic 500 error, should be fixed to 400 ?
-        console.error('updateActivityById', error);
-        return {error: 500, message: 'db error'};
+const updateActivityById = async (activityId, userId, activityData) => {
+  try {
+    const allowedFields = {
+      activity_type: activityData.activity_type,
+      intensity: activityData.intensity,
+      duration: activityData.duration,
+    };
+
+    activityId = parseInt(activityId);
+    const sql = promisePool.format(
+      `UPDATE activities SET ?
+      WHERE activity_id=? AND user_id=?`,
+      [allowedFields, activityId, userId]
+      );
+      const [result] = await promisePool.query(sql);
+
+      if (result.affectedRows === 0) {
+          return { error: 404, message: 'Activity not found' };
       }
+      return { message: 'Activity data updated', activityId: activityId };
+  } catch (error) {
+      console.error('updateActivityById', error);
+      return { error: 500, message: 'db error' };
+  }
 };
+
+
 
 const deleteActivityById = async (id, userId) => {
   try {
