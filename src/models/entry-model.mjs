@@ -75,6 +75,7 @@ const deleteEntryById = async (id, userId) => {
   try {
     const sql = 'DELETE FROM diaryentries WHERE entry_id=? AND user_id=?';
     const params = [id, userId];
+    console.log(params)
     const [result] = await promisePool.query(sql, params);
     // console.log(result);
     if (result.affectedRows === 0) {

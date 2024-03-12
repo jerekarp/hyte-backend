@@ -153,3 +153,40 @@ content-type: application/json
 # Delete activity
 DELETE http://localhost:3000/api/activities/:id
 ```
+
+### `/api/measurements`
+
+Example queries:
+
+```http
+# Get all measurements for a logged in user (requires token)
+GET http://localhost:3000/api/measurements
+
+# Get measurements by id (requires token)
+GET http://localhost:3000/api/measurements/:id
+
+# Post measurement
+POST http://localhost:3000/api/measurements
+content-type: application/json
+
+{
+  "measurement_type": "Blood Pressure",
+  "value": 130,
+  "unit": "mmHg",
+  "notes": "Normal"
+}
+
+# Update measurement
+PUT http://localhost:3000/api/measurements/:id
+content-type: application/json
+
+{
+  "measurement_type": "Blood Pressure",
+  "value": 136,
+  "unit": "mmHg",
+  "notes": "Fasting"
+}
+
+# Delete measurement
+DELETE http://localhost:3000/api/measurements/:id
+```

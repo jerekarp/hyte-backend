@@ -70,7 +70,7 @@ const putUser = async (req, res, next) => {
   } else {
     // If the authenticated user is not admin, they can only update their own data
     // Check if the user is trying to update their own data
-    if (userId !== parseInt(req.params.id)) {
+    if (userId !== parseInt(req.user.user_id)) {
       return next(customError('Unauthorized', 401));
     }
     // If the user is updating their own data, proceed with the update
