@@ -31,7 +31,7 @@ const getActivities = async (req, res) => {
 const getActivityById = async (req, res, next) => {
   // Authentication: Check if user is authenticated
   if (!req.user) {
-    return res.sendStatus(401); // Unauthorized
+    return res.status(401).json({virhe: 'Unauthorized'});
   }
 
   // Retrieve entry by id
@@ -58,23 +58,13 @@ const putActivity = async (req, res, next) => {
   const activityId = req.params.id;
   const userId = req.user.user_id;
 
-  // Tarkista, onko käyttäjä admin
-  if (req.user.user_level === 'admin') {
-    // Admin voi päivittää kaikki aktiviteetit (!!!!!!!!!Ei toimi!)
-    const result = await updateActivityById(activityId, req.body);
-    if (result.error) {
-      return next(customError(result.message, result.error));
-    }
-    return res.status(201).json(result);
-  } else {
-    // Jos käyttäjä ei ole admin, hän voi päivittää vain omia aktiviteettejaan
-    console.log("asddsadsasd", req.body)
-    const result = await updateActivityById(activityId, userId, req.body);
-    if (result.error) {
-      return next(customError(result.message, result.error));
-    }
-    return res.status(201).json(result);
+  // Jos käyttäjä ei ole admin, hän voi päivittää vain omia aktiviteettejaan
+  console.log("asddsadsasd", req.body)
+  const result = await updateActivityById(activityId, userId, req.body);
+  if (result.error) {
+    return next(customError(result.message, result.error));
   }
+  return res.status(201).json(result);
 };
 
 

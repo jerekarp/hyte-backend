@@ -86,10 +86,10 @@ Example queries:
 # Get all entries for a logged in user (requires token)
 GET http://localhost:3000/api/entries
 
-# Get entries by id
+# Get entries by id (requires token)
 GET http://localhost:3000/api/entries/:id
 
-# Post entry
+# Post entry (requires token)
 POST http://localhost:3000/api/entries
 content-type: application/json
 
@@ -102,7 +102,7 @@ content-type: application/json
   "user_id": 3
 }
 
-# Update entry
+# Update entry (requires token)
 PUT http://localhost:3000/api/entries/:id
 content-type: application/json
 
@@ -114,7 +114,7 @@ content-type: application/json
   "notes": "This was a good day",
 }
 
-# Delete entry
+# Delete entry (requires token)
 DELETE http://localhost:3000/api/entries/:id
 ```
 
@@ -129,7 +129,7 @@ GET http://localhost:3000/api/activities
 # Get activities by id (requires token)
 GET http://localhost:3000/api/activities/:id
 
-# Post activity
+# Post activity (requires token)
 POST http://localhost:3000/api/activities
 content-type: application/json
 
@@ -140,7 +140,7 @@ content-type: application/json
     "user_id": 16
 }
 
-# Update activity
+# Update activity (requires token)
 PUT http://localhost:3000/api/activities/:id
 content-type: application/json
 
@@ -150,7 +150,7 @@ content-type: application/json
   "duration": "01:16:00"
 }
 
-# Delete activity
+# Delete activity (requires token)
 DELETE http://localhost:3000/api/activities/:id
 ```
 
@@ -165,7 +165,7 @@ GET http://localhost:3000/api/measurements
 # Get measurements by id (requires token)
 GET http://localhost:3000/api/measurements/:id
 
-# Post measurement
+# Post measurement (requires token)
 POST http://localhost:3000/api/measurements
 content-type: application/json
 
@@ -176,7 +176,7 @@ content-type: application/json
   "notes": "Normal"
 }
 
-# Update measurement
+# Update measurement (requires token)
 PUT http://localhost:3000/api/measurements/:id
 content-type: application/json
 
@@ -187,6 +187,6 @@ content-type: application/json
   "notes": "Fasting"
 }
 
-# Delete measurement
+# Delete measurement (requires token)
 DELETE http://localhost:3000/api/measurements/:id
 ```
