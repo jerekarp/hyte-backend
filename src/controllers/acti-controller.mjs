@@ -69,30 +69,11 @@ const putActivity = async (req, res, next) => {
 
 
 const deleteActivity = async (req, res, next) => {
-  const activityId = req.params.id;
-  const userId = req.user.user_id;
-
-  // Tarkista, onko käyttäjä admin
-  if (req.user.user_level === 'admin') {
-    const result = await deleteActivityById(activityId, userId);
-    if (result.error) {
-      return next(customError(result.message, result.error));
-    }
-    return res.json(result);
-  } else {
-    // Jos käyttäjä ei ole admin, hän voi poistaa vain omia aktiviteettejaan
-    // Tarkista, että aktiviteetti kuuluu käyttäjälle ennen poistoa
-    const activity = await getActivityById(activityId);
-    if (!activity || activity.user_id !== userId) {
-      return next(customError('Unauthorized', 401));
-    }
-
-    const result = await deleteActivityById(activityId, userId);
-    if (result.error) {
-      return next(customError(result.message, result.error));
-    }
-    return res.json(result);
+  const result = await deleteActivityById(req.params.id, req.user.user_id);
+  if (result.error) {
+    return next(customError(result.message, result.error));
   }
+  return res.json(result);
 };
 
 

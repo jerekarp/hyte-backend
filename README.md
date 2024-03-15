@@ -111,7 +111,7 @@ content-type: application/json
   "mood": "Even more happy now",
   "weight": 69.6,
   "sleep_hours": 7,
-  "notes": "This was a good day",
+  "notes": "This was a good day"
 }
 
 # Delete entry (requires token)

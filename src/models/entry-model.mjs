@@ -27,6 +27,7 @@ const listAllEntriesByUserId = async (id) => {
 };
 
 const findEntryById = async (id, userId) => {
+  console.log(id)
   try {
     const [rows] = await promisePool.query(
       'SELECT * FROM diaryentries WHERE entry_id = ? AND user_id = ?',
