@@ -44,7 +44,7 @@ const authRouter = express.Router();
 
 authRouter
   /**
-   * @api {post} /auth/login Login
+   * @api {post} auth/login Login
    * @apiVersion 1.0.0
    * @apiName PostLogin
    * @apiGroup Authentication
@@ -87,7 +87,7 @@ authRouter
     postLogin,
   )
   /**
-   * @api {get} /auth/me Request information about current user
+   * @api {get} auth/me Request information about current user
    * @apiVersion 1.0.0
    * @apiName GetMe
    * @apiGroup Authentication

@@ -66,7 +66,7 @@ const activitiesRouter = express.Router();
  */
 
 /**
- * @api {post} /api/activities Post activity
+ * @api {post} api/activities Post activity
  * @apiVersion 1.0.0
  * @apiName PostActivity
  * @apiGroup Activities
@@ -120,7 +120,7 @@ activitiesRouter
   );
 
   /**
- * @api {get} /api/activities/:id Get activities by id
+ * @api {get} api/activities/:id Get activities by id
  * @apiVersion 1.0.0
  * @apiName GetActivityById
  * @apiGroup Activities
@@ -156,7 +156,7 @@ activitiesRouter
  */
 
  /**
- * @api {put} /api/activities/:id Update activity
+ * @api {put} api/activities/:id Update activity
  * @apiVersion 1.0.0
  * @apiName PutActivity
  * @apiGroup Activities
@@ -194,7 +194,7 @@ activitiesRouter
  */
 
  /**
- * @api {delete} /api/measurements/:id Delete measurement
+ * @api {delete} api/measurements/:id Delete measurement
  * @apiVersion 1.0.0
  * @apiName DeleteMeasurement
  * @apiGroup Measurements

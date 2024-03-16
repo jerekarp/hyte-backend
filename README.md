@@ -60,8 +60,8 @@ POST http://127.0.0.1:3000/api/users
 content-type: application/json
 
 {
-  "username": "test-user",
-  "password": "test-password",
+  "username": "testuser",
+  "password": "testpassword",
   "email": "test@example.com"
 }
 
@@ -70,8 +70,8 @@ PUT http://127.0.0.1:3000/api/users/
 content-type: application/json
 
 {
-  "username": "test-user",
-  "password": "test-password",
+  "username": "testuser",
+  "password": "testpassword",
   "email": "test@example.com"
 }
 
