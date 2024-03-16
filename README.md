@@ -34,7 +34,7 @@
 
 - **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table.
 
-- **Adding New Information**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu.
+- **Adding New Information**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu and see notification after adding them.
 
 - **Profile & Users**: On the profile page (profile.html), the user can search for all users and view their information by clicking the "Info" button or delete their own data by clicking the "Delete" button. If a non-administrator attempts to delete another user's data, they will receive a notification.
 
