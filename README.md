@@ -24,6 +24,8 @@
 
 ## Functionalities:
 
+- **Responsive** - The website's CSS definitions have been crafted with responsive design in mind, ensuring smooth functionality on smartphones through the use of media queries.
+
 - **User Arrival**: When a user arrives at the site, they have the option to either log in or create a new account by clicking the "Don't have an account? Create one" link. For security reasons, the password must be entered twice during registration.
 
 - **Logging In**: If an incorrect username or password is entered, an error message appears on the login form.
