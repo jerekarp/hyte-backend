@@ -59,7 +59,7 @@
 - **created_at**: Timestamp indicating when the user account was created.
 - **user_level**: User's level, default set to 'regular'.
 
-### Measurements Table
+### measurements Table
 - **measurement_id**: Unique identifier for each measurement (auto-incremented).
 - **user_id**: Identifier linking the measurement to a specific user.
 - **measurement_type**: Type of measurement recorded.
@@ -68,7 +68,7 @@
 - **notes**: Additional notes or comments.
 - **measurement_time**: Timestamp indicating when the measurement was taken.
 
-### Activities Table
+### activities Table
 - **activity_id**: Unique identifier for each activity (auto-incremented).
 - **user_id**: Identifier linking the activity to a specific user.
 - **activity_type**: Type of activity performed.
@@ -76,7 +76,7 @@
 - **created_at**: Timestamp indicating when the activity was recorded.
 - **duration**: Duration of the activity.
 
-### Diary Entries Table
+### diaryentries Table
 - **entry_id**: Unique identifier for each diary entry (auto-incremented).
 - **user_id**: Identifier linking the entry to a specific user.
 - **entry_date**: Date of the entry.
