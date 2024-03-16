@@ -46,13 +46,10 @@
 
 
 
+## Database Structure:
 
 ![Database Image](db/dbDiagram.png)
 
-
-
-
-## Database Structure:
 
 ### Users Table
 - **user_id**: Unique identifier for each user (auto-incremented).
