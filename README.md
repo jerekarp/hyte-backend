@@ -46,6 +46,8 @@
 
 
 
+![Database Image](db/dbDiagram.png)
+
 ## Database Structure:
 
 ### Users Table
