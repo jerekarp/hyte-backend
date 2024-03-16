@@ -13,7 +13,7 @@ import {validationErrorHandler} from '../middlewares/error-handler.mjs';
 const entryRouter = express.Router();
 
 /**
- * @api {get} /api/entries Get all entries for a logged in user
+ * @api {get} entries Get all entries for a logged in user
  * @apiVersion 1.0.0
  * @apiName GetEntries
  * @apiGroup Entries
@@ -54,7 +54,7 @@ const entryRouter = express.Router();
  */
 
 /**
- * @api {post} /api/entries Create a new entry for a logged in user
+ * @api {post} entries Create a new entry for a logged in user
  * @apiVersion 1.0.0
  * @apiName PostEntry
  * @apiGroup Entries
@@ -109,7 +109,7 @@ entryRouter
   );
 
   /**
- * @api {get} /api/entries/:id Get a specific entry for a logged in user
+ * @api {get} entries/:id Get a specific entry for a logged in user
  * @apiVersion 1.0.0
  * @apiName GetEntryById
  * @apiGroup Entries
@@ -149,7 +149,7 @@ entryRouter
  */
 
   /**
- * @api {put} /api/entries/:id Update an entry for a logged in user
+ * @api {put} entries/:id Update an entry for a logged in user
  * @apiVersion 1.0.0
  * @apiName UpdateEntry
  * @apiGroup Entries
@@ -191,7 +191,7 @@ entryRouter
  */
 
   /**
- * @api {delete} /api/entries/:id Delete an entry for a logged in user
+ * @api {delete} entries/:id Delete an entry for a logged in user
  * @apiVersion 1.0.0
  * @apiName DeleteEntry
  * @apiGroup Entries

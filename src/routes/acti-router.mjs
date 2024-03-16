@@ -13,7 +13,7 @@ import { validationErrorHandler } from '../middlewares/error-handler.mjs';
 const activitiesRouter = express.Router();
 
 /**
- * @api {get} /api/activities Get all activities for a logged in user
+ * @api {get} activities Get all activities for a logged in user
  * @apiVersion 1.0.0
  * @apiName GetActivities
  * @apiGroup Activities
@@ -66,7 +66,7 @@ const activitiesRouter = express.Router();
  */
 
 /**
- * @api {post} api/activities Post activity
+ * @api {post} activities Post activity
  * @apiVersion 1.0.0
  * @apiName PostActivity
  * @apiGroup Activities
@@ -120,7 +120,7 @@ activitiesRouter
   );
 
   /**
- * @api {get} api/activities/:id Get activities by id
+ * @api {get} activities/:id Get activities by id
  * @apiVersion 1.0.0
  * @apiName GetActivityById
  * @apiGroup Activities
@@ -156,7 +156,7 @@ activitiesRouter
  */
 
  /**
- * @api {put} api/activities/:id Update activity
+ * @api {put} activities/:id Update activity
  * @apiVersion 1.0.0
  * @apiName PutActivity
  * @apiGroup Activities
@@ -176,13 +176,13 @@ activitiesRouter
  *     }
  *
  * @apiSuccess {String} message Confirmation message.
- * @apiSuccess {Number} activityId Id of the updated activity.
+ * @apiSuccess {Number} activity_id Id of the updated activity.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 201 Created
  *     {
  *        "message": "Activity data updated",
- *        "activityId": 38
+ *        "activity_id": 38
  *     }
  *
  * @apiError UnauthorizedError Invalid token provided.
@@ -194,23 +194,23 @@ activitiesRouter
  */
 
  /**
- * @api {delete} api/measurements/:id Delete measurement
+ * @api {delete} activities/:id Delete activity
  * @apiVersion 1.0.0
- * @apiName DeleteMeasurement
- * @apiGroup Measurements
+ * @apiName DeleteActivity
+ * @apiGroup Activities
  * @apiPermission token
  * @apiHeader {String} Authorization Bearer token.
  *
- * @apiParam {Number} id Id of the measurement to be deleted.
+ * @apiParam {Number} id Id of the activity to be deleted.
  *
  * @apiSuccess {String} message Confirmation message.
- * @apiSuccess {String} measurementId Id of the deleted measurement.
+ * @apiSuccess {String} activity_id of the deleted activity.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *        "message": "Measurement deleted",
- *        "measurementId": "38"
+ *        "message": "Activity deleted",
+ *        "acticity_id": "38"
  *     }
  *
  * @apiError UnauthorizedError Invalid token provided.

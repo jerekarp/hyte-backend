@@ -14,7 +14,7 @@ const userRouter = express.Router();
 userRouter
 .route('/')
 /**
- * @api {get} /api/users Request user list
+ * @api {get} users Request user list
  * @apiVersion 1.0.0
  * @apiName GetUsers
  * @apiGroup Users
@@ -97,7 +97,7 @@ userRouter
 .get(authenticateToken, getUsers)
 // update user
 /**
- * @api {put} /api/users Update user's own data
+ * @api {put} users Update user's own data
  * @apiVersion 1.0.0
  * @apiName UpdateUser
  * @apiGroup Users
@@ -111,6 +111,13 @@ userRouter
  *
  * @apiSuccess {String} message Confirmation message.
  * @apiSuccess {Number} user_id Id of the updated user.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "username": "testuser",
+ *       "password": "testpassword55",
+ *       "email": "test@example.com"
+ *     }
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -139,7 +146,7 @@ userRouter
 )
 // user registration
 /**
- * @api {post} /api/users Create user
+ * @api {post} users Create user
  * @apiVersion 1.0.0
  * @apiName CreateUser
  * @apiGroup Users
@@ -152,6 +159,13 @@ userRouter
  *
  * @apiSuccess {String} message Confirmation message.
  * @apiSuccess {Number} user_id Id of the newly created user.
+ *
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *        "username": "testuser",
+ *        "password": "testpassword55",
+ *        "email": "test55@example.com"
+ *     }
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -181,7 +195,7 @@ userRouter
 .route('/:id')
 // get info of a user
 /**
- * @api {get} /api/users/:id Get user by id
+ * @api {get} users/:id Get user by id
  * @apiVersion 1.0.0
  * @apiName GetUserById
  * @apiGroup Users
@@ -216,7 +230,7 @@ userRouter
 )
 // delete user based on id
 /**
- * @api {delete} /api/users/:id Delete user
+ * @api {delete} users/:id Delete user
  * @apiVersion 1.0.0
  * @apiName DeleteUser
  * @apiGroup Users

@@ -1,4 +1,4 @@
-# Hyte web dev example back-end server
+# Hyte web dev back-end server
 
 **Node.js + Express** application.
 
@@ -13,7 +13,83 @@
 5. Create `.env` file based on `.env.sample`
 6. Start the dev server: `npm run dev` / `npm start`
 
+## Project
+
+> [!NOTE]
+> - [Click here](https://jerek.norwayeast.cloudapp.azure.com/) to try out the functionalities directly on the website.
+> - You can find the FrontEnd code [here](https://github.com/jerekarp/hyte-frontend)
+> - [Online API-documentation](https://jerek.norwayeast.cloudapp.azure.com/docs/)
+
+
+
+## Functionalities:
+
+- **User Arrival**: When a user arrives at the site, they have the option to either log in or create a new account by clicking the "Don't have an account? Create one" link. For security reasons, the password must be entered twice during registration.
+
+- **Logging In**: If an incorrect username or password is entered, an error message appears on the login form.
+
+- **Successful Login**: Upon successful login, a notification appears above the login form indicating the successful login.
+
+- **Navigating to Home**: The user is directed to the home page (home.html), where a personalized greeting message based on the time of day appears in the center of the screen. In the navigation bar, next to the LogOut button, the username of the logged-in user is displayed.
+
+- **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table.
+
+- **Adding New Information**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu.
+
+- **Profile & Users**: On the profile page (profile.html), the user can search for all users and view their information by clicking the "Info" button or delete their own data by clicking the "Delete" button. If a non-administrator attempts to delete another user's data, they will receive a notification.
+
+- **Updating Information**: On the Profile & Users page, the user can also update their own information, such as username, password, or email address. The updated information will also be reflected in the list of all users.
+
+- **About Page**: On the About page (about.html), the user sees an animated introduction image with a parallax effect added.
+
+- **Logging Out**: The user can log out at any time by clicking the "Log Out" button in the top right corner.
+
+
+
+## Database Structure:
+
+### Users Table
+- **user_id**: Unique identifier for each user (auto-incremented).
+- **username**: Username of the user (unique).
+- **password**: Password of the user.
+- **email**: Email address of the user (unique).
+- **created_at**: Timestamp indicating when the user account was created.
+- **user_level**: User's level, default set to 'regular'.
+
+### Measurements Table
+- **measurement_id**: Unique identifier for each measurement (auto-incremented).
+- **user_id**: Identifier linking the measurement to a specific user.
+- **measurement_type**: Type of measurement recorded.
+- **value**: Value of the measurement.
+- **unit**: Unit of measurement.
+- **notes**: Additional notes or comments.
+- **measurement_time**: Timestamp indicating when the measurement was taken.
+
+### Activities Table
+- **activity_id**: Unique identifier for each activity (auto-incremented).
+- **user_id**: Identifier linking the activity to a specific user.
+- **activity_type**: Type of activity performed.
+- **intensity**: Intensity level of the activity.
+- **created_at**: Timestamp indicating when the activity was recorded.
+- **duration**: Duration of the activity.
+
+### Diary Entries Table
+- **entry_id**: Unique identifier for each diary entry (auto-incremented).
+- **user_id**: Identifier linking the entry to a specific user.
+- **entry_date**: Date of the entry.
+- **mood**: Mood of the user.
+- **weight**: Weight of the user.
+- **sleep_hours**: Number of hours slept.
+- **notes**: Additional notes or comments.
+- **created_at**: Timestamp indicating when the entry was recorded.
+
+
+
 ## Resources and endpoints
+
+> [!NOTE]
+> These details are also available in the API-documentation (see the link above)
+
 
 ### `/items` (works with hard-coded mock data only, no need for db)
 
@@ -71,7 +147,7 @@ content-type: application/json
 
 {
   "username": "testuser",
-  "password": "testpassword",
+  "password": "testpassword55",
   "email": "test@example.com"
 }
 

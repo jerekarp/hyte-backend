@@ -90,7 +90,7 @@ INSERT INTO `measurements` (`measurement_id`, `user_id`, `measurement_type`, `va
 /*!40000 ALTER TABLE `measurements` ENABLE KEYS */;
 
 -- Dumping structure for table healthdiary.users
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `Users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,

@@ -13,7 +13,7 @@ import { validationErrorHandler } from '../middlewares/error-handler.mjs';
 const measurementsRouter = express.Router();
 
   /**
- * @api {get} api/measurements Get logged in user's measurements
+ * @api {get} measurements Get logged in user's measurements
  * @apiVersion 1.0.0
  * @apiName GetMeasurements
  * @apiGroup Measurements
@@ -52,7 +52,7 @@ const measurementsRouter = express.Router();
  */
 
 /**
- * @api {post} api/measurements Create a new measurement for a logged in user
+ * @api {post} measurements Create a new measurement for a logged in user
  * @apiVersion 1.0.0
  * @apiName PostMeasurement
  * @apiGroup Measurements
@@ -105,7 +105,7 @@ measurementsRouter
   );
 
  /**
- * @api {get} api/measurements/:id Get a specific measurement for a logged in user
+ * @api {get} measurements/:id Get a specific measurement for a logged in user
  * @apiVersion 1.0.0
  * @apiName GetMeasurementById
  * @apiGroup Measurements
@@ -143,7 +143,7 @@ measurementsRouter
  */
 
  /**
- * @api {put} api/measurements/:id Update a measurement for a logged in user
+ * @api {put} measurements/:id Update a measurement for a logged in user
  * @apiVersion 1.0.0
  * @apiName PutMeasurement
  * @apiGroup Measurements
@@ -183,7 +183,7 @@ measurementsRouter
  */
 
  /**
- * @api {delete} api/measurements/:id Delete a measurement for a logged in user
+ * @api {delete} measurements/:id Delete a measurement for a logged in user
  * @apiVersion 1.0.0
  * @apiName DeleteMeasurement
  * @apiGroup Measurements
@@ -211,7 +211,7 @@ measurementsRouter
  */
 
  /**
- * @api {post} api/activities Post activity
+ * @api {post} activities Post activity
  * @apiVersion 1.0.0
  * @apiName PostActivity
  * @apiGroup Activities
@@ -250,7 +250,7 @@ measurementsRouter
  */
 
  /**
- * @api {put} api/activities/:id Update activity
+ * @api {put} activities/:id Update activity
  * @apiVersion 1.0.0
  * @apiName PutActivity
  * @apiGroup Activities
