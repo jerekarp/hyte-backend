@@ -46,6 +46,21 @@
 
 - **Logging Out**: The user can log out at any time by clicking the "Log Out" button in the top right corner.
 
+Pictures from website interface:
+Frontpage:
+![FrontPage Image](https://imgur.com/mQxUeYM)
+
+HealthDiary (home.html):
+![HealthDiary Image](https://imgur.com/xj3Q5Oe)
+
+Profile & Users (profile.html):
+[Profile and Users Image](https://imgur.com/4u2fv8l)
+
+About (about.html) 1/2:
+[About 1/2 Image](https://imgur.com/HnredVT)
+
+About 2/2 (after parallax hero):
+[About 2/2 Image](https://imgur.com/KivMk9q)
 
 
 ## Database Structure:
