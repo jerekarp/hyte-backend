@@ -108,6 +108,24 @@
 
 
 
+## References
+
+**Gradient background with waves**
+[CODE BY Bárbara Rodríguez](https://codepen.io/baarbaracrr/pen/KKovmGb)
+
+**HERO IMAGE x CSS GRADIENT**
+[Code by](https://codepen.io/nxworld/pen/OVMzaP) Nayoya
+
+**Images from**
+[Webfx](https://www.webfx.com/blog/web-design/minimalist-website-designs/)
+[Freepik](https://www.freepik.com/free-photo/top-view-notebook-with-plant_8132324.htm#fromView=search&page=2&position=3&uuid=58343d17-897e-449f-8740-2c9077331bc6)
+
+**Some code tutorials from:**
+[W3 Schools](https://www.w3schools.com/)
+
+
+
+
 ## Resources and endpoints
 
 > [!NOTE]
