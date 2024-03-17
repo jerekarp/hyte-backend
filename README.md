@@ -48,19 +48,19 @@
 
 Pictures from website interface:
 Frontpage:
-![FrontPage Image](https://imgur.com/mQxUeYM)
+![FrontPage Image](https://i.imgur.com/mQxUeYM.jpeg)
 
 HealthDiary (home.html):
-![HealthDiary Image](https://imgur.com/xj3Q5Oe)
+![HealthDiary Image](https://i.imgur.com/xj3Q5Oe.png)
 
 Profile & Users (profile.html):
-[Profile and Users Image](https://imgur.com/4u2fv8l)
+[Profile and Users Image](https://i.imgur.com/4u2fv8l.png)
 
 About (about.html) 1/2:
-[About 1/2 Image](https://imgur.com/HnredVT)
+[About 1/2 Image](https://i.imgur.com/HnredVT.png)
 
 About 2/2 (after parallax hero):
-[About 2/2 Image](https://imgur.com/KivMk9q)
+[About 2/2 Image](https://i.imgur.com/KivMk9q.png)
 
 
 ## Database Structure:
