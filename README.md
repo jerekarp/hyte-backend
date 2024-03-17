@@ -49,19 +49,20 @@
 
 
 ## Pictures from website interface:
-Frontpage:
+
+***Frontpage:***
 ![FrontPage Image](https://i.imgur.com/mQxUeYM.jpeg)
 
-HealthDiary (home.html):
+***HealthDiary (home.html):***
 ![HealthDiary Image](https://i.imgur.com/xj3Q5Oe.png)
 
-Profile & Users (profile.html):
+***Profile & Users (profile.html):***
 [Profile and Users Image](https://i.imgur.com/4u2fv8l.png)
 
-About (about.html) 1/2:
+***About (about.html) 1/2:***
 [About 1/2 Image](https://i.imgur.com/HnredVT.png)
 
-About 2/2 (after parallax hero):
+***About 2/2 (after parallax hero):***
 [About 2/2 Image](https://i.imgur.com/KivMk9q.png)
 
 
