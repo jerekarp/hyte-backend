@@ -24,7 +24,7 @@
 
 ## Functionalities:
 
-- **Responsive** - The website's CSS definitions have been crafted with responsive design in mind, ensuring smooth functionality on smartphones through the use of media queries.
+- **Responsive** - The website's CSS definitions have been crafted with responsive design in mind, ensuring smooth functionality on smartphones and tablets through the use of media queries.
 
 - **User Arrival**: When a user arrives at the site, they have the option to either log in or create a new account by clicking the "Don't have an account? Create one" link. For security reasons, the password must be entered twice during registration.
 
@@ -34,9 +34,11 @@
 
 - **Navigating to Home**: The user is directed to the home page (home.html), where a personalized greeting message based on the time of day appears in the center of the screen. In the navigation bar, next to the LogOut button, the username of the logged-in user is displayed.
 
-- **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table.
+- **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table. Only 7 entries per page allowed, then pagination functions will make new pages for the tables.
 
-- **Adding New Information**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu.
+- **Adding New Entries**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu and see notification after adding them.
+
+- **Updating Entries**: Users can also edit existing diary entries, activities, and measurements from the "Update entry" menu.
 
 - **Profile & Users**: On the profile page (profile.html), users can search for all users and view their information by clicking the "Info" button, or delete their own data by clicking the "Delete" button. If a non-administrator attempts to delete another user's data, they will receive a notification. Successful user deletion will prompt a notification and log the user out of the application (resetting localStorage data) if the user is not an admin.
 
