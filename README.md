@@ -34,11 +34,9 @@
 
 - **Navigating to Home**: The user is directed to the home page (home.html), where a personalized greeting message based on the time of day appears in the center of the screen. In the navigation bar, next to the LogOut button, the username of the logged-in user is displayed.
 
-- **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table. Only 7 entries per page allowed, then pagination functions will make new pages for the tables.
+- **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table.
 
-- **Adding New Entries**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu and see notification after adding them.
-
-- **Updating Entries**: Users can also edit existing diary entries, activities, and measurements from the "Update entry" menu.
+- **Adding New Information**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu.
 
 - **Profile & Users**: On the profile page (profile.html), users can search for all users and view their information by clicking the "Info" button, or delete their own data by clicking the "Delete" button. If a non-administrator attempts to delete another user's data, they will receive a notification. Successful user deletion will prompt a notification and log the user out of the application (resetting localStorage data) if the user is not an admin.
 
@@ -48,23 +46,6 @@
 
 - **Logging Out**: The user can log out at any time by clicking the "Log Out" button in the top right corner.
 
-
-## Pictures from website interface:
-
-***Frontpage:***
-![FrontPage Image](https://i.imgur.com/mQxUeYM.jpeg)
-
-***HealthDiary (home.html):***
-![HealthDiary Image](https://i.imgur.com/xj3Q5Oe.png)
-
-***Profile & Users (profile.html):***
-![Profile and Users Image](https://i.imgur.com/4u2fv8l.png)
-
-***About (about.html) 1/2:***
-![About 1/2 Image](https://i.imgur.com/HnredVT.png)
-
-***About 2/2 (after parallax hero):***
-![About 2/2 Image](https://i.imgur.com/KivMk9q.png)
 
 
 ## Database Structure:
