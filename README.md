@@ -46,7 +46,9 @@
 
 - **Logging Out**: The user can log out at any time by clicking the "Log Out" button in the top right corner.
 
-Pictures from website interface:
+
+
+## Pictures from website interface:
 Frontpage:
 ![FrontPage Image](https://i.imgur.com/mQxUeYM.jpeg)
 
