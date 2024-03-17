@@ -24,6 +24,8 @@
 
 ## Functionalities:
 
+- **Responsive** - The website's CSS definitions have been crafted with responsive design in mind, ensuring smooth functionality on smartphones through the use of media queries.
+
 - **User Arrival**: When a user arrives at the site, they have the option to either log in or create a new account by clicking the "Don't have an account? Create one" link. For security reasons, the password must be entered twice during registration.
 
 - **Logging In**: If an incorrect username or password is entered, an error message appears on the login form.
@@ -32,11 +34,13 @@
 
 - **Navigating to Home**: The user is directed to the home page (home.html), where a personalized greeting message based on the time of day appears in the center of the screen. In the navigation bar, next to the LogOut button, the username of the logged-in user is displayed.
 
-- **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table.
+- **Health Diary**: On the Health Diary (home.html) page, the user can view their own diary entries, activities, and measurements. If the user has no entries and attempts to retrieve them, a notification appears in the table. Only 7 entries per page allowed, then pagination functions will make new pages for the tables.
 
-- **Adding New Information**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu.
+- **Adding New Entries**: The user can add new diary entries, activities, and measurements by selecting the desired option from the "Select an option" menu and see notification after adding them.
 
-- **Profile & Users**: On the profile page (profile.html), the user can search for all users and view their information by clicking the "Info" button or delete their own data by clicking the "Delete" button. If a non-administrator attempts to delete another user's data, they will receive a notification.
+- **Updating Entries**: Users can also edit existing diary entries, activities, and measurements from the "Update entry" menu.
+
+- **Profile & Users**: On the profile page (profile.html), users can search for all users and view their information by clicking the "Info" button, or delete their own data by clicking the "Delete" button. If a non-administrator attempts to delete another user's data, they will receive a notification. Successful user deletion will prompt a notification and log the user out of the application (resetting localStorage data) if the user is not an admin.
 
 - **Updating Information**: On the Profile & Users page, the user can also update their own information, such as username, password, or email address. The updated information will also be reflected in the list of all users.
 
@@ -45,8 +49,28 @@
 - **Logging Out**: The user can log out at any time by clicking the "Log Out" button in the top right corner.
 
 
+## Pictures from website interface:
+
+***Frontpage:***
+![FrontPage Image](https://i.imgur.com/mQxUeYM.jpeg)
+
+***HealthDiary (home.html):***
+![HealthDiary Image](https://i.imgur.com/xj3Q5Oe.png)
+
+***Profile & Users (profile.html):***
+![Profile and Users Image](https://i.imgur.com/4u2fv8l.png)
+
+***About (about.html) 1/2:***
+![About 1/2 Image](https://i.imgur.com/HnredVT.png)
+
+***About 2/2 (after parallax hero):***
+![About 2/2 Image](https://i.imgur.com/KivMk9q.png)
+
 
 ## Database Structure:
+
+![Database Image](db/dbDiagram.png)
+
 
 ### Users Table
 - **user_id**: Unique identifier for each user (auto-incremented).
@@ -56,7 +80,7 @@
 - **created_at**: Timestamp indicating when the user account was created.
 - **user_level**: User's level, default set to 'regular'.
 
-### Measurements Table
+### measurements Table
 - **measurement_id**: Unique identifier for each measurement (auto-incremented).
 - **user_id**: Identifier linking the measurement to a specific user.
 - **measurement_type**: Type of measurement recorded.
@@ -65,7 +89,7 @@
 - **notes**: Additional notes or comments.
 - **measurement_time**: Timestamp indicating when the measurement was taken.
 
-### Activities Table
+### activities Table
 - **activity_id**: Unique identifier for each activity (auto-incremented).
 - **user_id**: Identifier linking the activity to a specific user.
 - **activity_type**: Type of activity performed.
@@ -73,7 +97,7 @@
 - **created_at**: Timestamp indicating when the activity was recorded.
 - **duration**: Duration of the activity.
 
-### Diary Entries Table
+### diaryentries Table
 - **entry_id**: Unique identifier for each diary entry (auto-incremented).
 - **user_id**: Identifier linking the entry to a specific user.
 - **entry_date**: Date of the entry.
@@ -82,6 +106,24 @@
 - **sleep_hours**: Number of hours slept.
 - **notes**: Additional notes or comments.
 - **created_at**: Timestamp indicating when the entry was recorded.
+
+
+
+## References
+
+**Gradient background with waves**
+[CODE BY Bárbara Rodríguez](https://codepen.io/baarbaracrr/pen/KKovmGb)
+
+**HERO IMAGE x CSS GRADIENT**
+[Code by](https://codepen.io/nxworld/pen/OVMzaP) Nayoya
+
+**Images from**
+[Webfx](https://www.webfx.com/blog/web-design/minimalist-website-designs/)
+[Freepik](https://www.freepik.com/free-photo/top-view-notebook-with-plant_8132324.htm#fromView=search&page=2&position=3&uuid=58343d17-897e-449f-8740-2c9077331bc6)
+
+**Some code tutorials from:**
+[W3 Schools](https://www.w3schools.com/)
+
 
 
 

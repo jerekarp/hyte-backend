@@ -65,20 +65,48 @@ const updateUserById = async (user) => {
 
 const deleteUserById = async (id) => {
   try {
+    // Poista viiteavaimet liittyvistä tauluista
+    await updateRelatedTables(id);
+
+    // Poista käyttäjä
     const sql = 'DELETE FROM Users WHERE user_id=?';
     const params = [id];
     const [result] = await promisePool.query(sql, params);
-    // console.log(result);
+
     if (result.affectedRows === 0) {
       return {error: 404, message: 'user not found'};
     }
     return {message: 'user deleted', user_id: id};
   } catch (error) {
-    // note that users with other data (FK constraint) cant be deleted directly
     console.error('deleteUserById', error);
     return {error: 500, message: 'db error'};
   }
 };
+
+
+const updateRelatedTables = async (userId) => {
+  try {
+    // Päivitä diaryentries-taulu
+    const sqlDiaryEntries = 'UPDATE diaryentries SET user_id = NULL WHERE user_id = ?';
+    const paramsDiaryEntries = [userId];
+    await promisePool.query(sqlDiaryEntries, paramsDiaryEntries);
+
+    // Päivitä measurements-taulu
+    const sqlMeasurements = 'UPDATE measurements SET user_id = NULL WHERE user_id = ?';
+    const paramsMeasurements = [userId];
+    await promisePool.query(sqlMeasurements, paramsMeasurements);
+
+    // Päivitä activities-taulu
+    const sqlActivities = 'UPDATE activities SET user_id = NULL WHERE user_id = ?';
+    const paramsActivities = [userId];
+    await promisePool.query(sqlActivities, paramsActivities);
+  } catch (error) {
+    console.error('updateRelatedTables', error);
+    throw error;
+  }
+};
+
+
 
 // Used for login
 const selectUserByUsername = async (username) => {
