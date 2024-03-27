@@ -54,7 +54,6 @@ const updateUserById = async (user) => {
     const params = [user.username, user.password, user.email, user.userId];
     await promisePool.query(sql, params);
     const [result] = await promisePool.query(sql, params);
-    console.log(result);
     return {message: 'user data updated', user_id: user.userId};
   } catch (error) {
     // now duplicate entry error is generic 500 error, should be fixed to 400 ?
@@ -126,11 +125,31 @@ const selectUserByUsername = async (username) => {
   }
 };
 
+const selectUserByEmail = async (email) => {
+  try {
+    const sql = 'SELECT * FROM Users WHERE email=?';
+    const params = [email];
+    const [rows] = await promisePool.query(sql, params);
+    // console.log(rows);
+    // if nothing is found with the user id, result array is empty []
+    if (rows.length === 0) {
+      return {error: 404, message: 'user not found'};
+    }
+    // Remove password property from result
+    delete rows[0].password;
+    return rows[0];
+  } catch (error) {
+    console.error('selectUserByEmail', error);
+    return {error: 500, message: 'db error'};
+  }
+};
+
 export {
   listAllUsers,
   selectUserById,
   insertUser,
   updateUserById,
   deleteUserById,
-  selectUserByUsername
+  selectUserByUsername,
+  selectUserByEmail
 };

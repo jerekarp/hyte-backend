@@ -5,7 +5,6 @@ const listAllEntries = async () => {
   try {
     const sql = 'SELECT * FROM diaryentries';
     const [rows] = await promisePool.query(sql);
-    console.log(sql)
     return rows;
   } catch (error) {
     console.error('listAllEntries', error);
@@ -27,7 +26,6 @@ const listAllEntriesByUserId = async (id) => {
 };
 
 const findEntryById = async (id, userId) => {
-  console.log(id)
   try {
     const [rows] = await promisePool.query(
       'SELECT * FROM diaryentries WHERE entry_id = ? AND user_id = ?',
@@ -50,7 +48,6 @@ const updateEntryById = async (entryId, userId, entryData) => {
       sleep_hours: entryData.sleep_hours,
       notes: entryData.notes,
     };
-
 
     const sql = promisePool.format(
       `UPDATE diaryentries SET ?
@@ -76,7 +73,6 @@ const deleteEntryById = async (id, userId) => {
   try {
     const sql = 'DELETE FROM diaryentries WHERE entry_id=? AND user_id=?';
     const params = [id, userId];
-    console.log(params)
     const [result] = await promisePool.query(sql, params);
     // console.log(result);
     if (result.affectedRows === 0) {

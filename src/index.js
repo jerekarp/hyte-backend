@@ -10,6 +10,7 @@ import measurementsRouter from './routes/meas-router.mjs';
 import cors from 'cors';
 import logger from './middlewares/logger.mjs';
 import authRouter from './routes/auth-router.mjs';
+import kubiosRouter from './routes/kubios-router.mjs';
 import {errorHandler, notFoundHandler} from './middlewares/error-handler.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -53,6 +54,9 @@ app.use('/api/activities', activitiesRouter);
 
 // Measurements
 app.use('/api/measurements', measurementsRouter);
+
+// Kubios API resource (/api/kubios)
+app.use('/api/kubios', kubiosRouter);
 
 // Default 404 not found
 app.use(notFoundHandler);

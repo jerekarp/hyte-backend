@@ -27,7 +27,6 @@ import {customError} from '../middlewares/error-handler.mjs';
  */
 const postLogin = async (req, res, next) => {
   const {username, password} = req.body;
-  console.log('login', req.body);
   const user = await selectUserByUsername(username);
   if (user.error) {
     return res.status(user.error).json(user);
